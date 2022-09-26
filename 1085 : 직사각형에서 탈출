@@ -1,0 +1,45 @@
+//1085 : 직사각형에서 탈출
+//새로 알게된 것 : Math.abs =>절댓값 표현
+
+```<java>
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+
+        Scanner sc = new Scanner(System.in);
+
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+        int w = sc.nextInt();
+        int h = sc.nextInt();
+
+        System.out.println(Rectangle(x,y,w,h));
+    }
+
+    public static int Rectangle(int x,int y,int w,int h){
+
+        int resultx = Math.abs(w-x);
+        int resulty = Math.abs(h-y);
+
+        int tempx= 0;
+        int tempy = 0;
+
+
+        //x값 판별
+        if(x <= resultx)
+            tempx = x;
+        else
+            tempx = resultx;
+        //y값 판별
+        if(y <= resulty)
+            tempy= y;
+        else
+            tempy= resulty;
+
+
+        if(tempx<=tempy)
+            return tempx;
+        else
+            return tempy;
+    }
+}
