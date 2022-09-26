@@ -1,7 +1,7 @@
 //1085 : 직사각형에서 탈출
 //새로 알게된 것 : Math.abs =>절댓값 표현
 
-```<java>
+
 import java.util.Scanner;
 public class Main{
     public static void main(String[] args){
