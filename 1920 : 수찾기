@@ -1,0 +1,42 @@
+//1920 : 수찾기
+//깨달은 것
+//Scanner로 할 시 시간초과 발생 
+import java.util.Scanner;
+
+public class _1920_수찾기 {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        int N = sc.nextInt();
+        int[] arr1 = new int[N];
+
+
+        for(int i=0; i<arr1.length; i++){
+            arr1[i] = sc.nextInt();
+        }
+
+        int M = sc.nextInt();
+        int[] arr2 = new int[M];
+
+        for(int i=0; i<arr2.length; i++){
+            arr2[i] = sc.nextInt();
+        }
+
+        for(int i =0; i<arr2.length; i++){
+            boolean check = false;
+            for(int j=0; j<arr1.length; j++){
+                if(arr2[i] == arr1[j]) {
+                    check = true;
+                    break;
+                }
+            }
+            if(check){
+                System.out.println("1");
+            }
+            else{
+                System.out.println("0");
+            }
+        }
+
+    }
+}
