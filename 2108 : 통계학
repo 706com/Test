@@ -1,0 +1,124 @@
+//2108 : 통계학
+//새로 알게된 것
+//카운팅정렬
+//Math.round : 반올림을 시켜준다 (주의할 점은 double형 변환을 해줘야 원활하다)
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class _2108_통계학 {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+
+        int[] arr = new int[N];
+        int[] counting = new int[8001];
+        int[] result = new int[N];
+
+        //입력되는 정수의 절댓값은 4000을 넘지 않는다
+        //인덱스에는 음수가 안되므로!! : -4000 입력시 -> 0 , 4000입력시 -> 8000
+        for(int i=0; i<N; i++){
+            arr[i] = Integer.parseInt(br.readLine())+4000;
+        }
+
+        for(int i=0; i<arr.length; i++){
+            counting[arr[i]]++;
+        }
+        for(int i=1; i<counting.length; i++){
+            counting[i] += counting[i-1];
+        }
+        //카운팅정렬 완료
+        for(int i=arr.length-1; i>=0; i--){
+            int value = arr[i];
+            counting[value]--;
+            result[counting[value]] = value-4000;
+        }
+
+        //1.산술평균 , 2.중앙값 , 3.최빈값 , 4.범위
+        int average;
+        int mid;
+        int many;
+        int range;
+
+        int sum = result[0];
+        int max = result[0];
+        int min = result[0];
+
+        int cnt_before=1;
+        int cnt_after=1;
+        int cnt_index=0;
+        boolean check = true;
+
+        for(int i=1; i<result.length; i++){
+            //모든수의 합
+            sum+=result[i];
+
+            //최댓값
+            if(max<result[i]){
+                max = result[i];
+            }
+            //최솟값
+            if(min>result[i]){
+                min = result[i];
+            }
+            //최빈값
+            //**************************여기서 오류 발생 -> 알고리즘 다시 짜기***************
+            if(result[i-1] != result[i]){
+                if (cnt_before == cnt_after) {
+                    if(check) {
+                        //cnt_index = i-1;
+                        cnt_before = cnt_after;
+                        cnt_after = 1;
+                        cnt_index = i-1;
+                        check=false;
+                        continue;
+                    }
+                }
+                if(cnt_before<cnt_after) {
+                    check = true;
+                    cnt_before = cnt_after;
+                    cnt_after = 1;
+                    cnt_index = i-1;
+                    continue;
+                }
+            }
+            else if(result[i-1] == result[i]) {
+                cnt_after++;
+                if(cnt_before<=cnt_after)
+                    cnt_index=i-1;
+            }
+            //********************************************
+        }
+
+        //1.산술평균
+        //Math.round -> 빈올림 함수
+        //double 형으로 변환 안하고 할 시 , 소수점을 버리고 가기 때문에 둘 중 하나라도 double형 으로 바꾼 뒤, 반올림 하여 소수점을 획득하고
+        //다시 int 형으로 바꾼다
+        average = (int)Math.round((double)sum / result.length);
+
+        //2.중앙값
+        mid = result[result.length/2];
+
+        //3.최빈값
+        many= result[cnt_index];
+
+        //4.범위
+        range = max-min;
+
+        System.out.println();
+
+
+        for(int i=0; i<result.length; i++){
+            System.out.print(result[i]+"\t");
+        }
+
+
+        System.out.println();
+        System.out.println(average);
+        System.out.println(mid);
+        System.out.println(many);
+        System.out.println(range);
+    }
+}
