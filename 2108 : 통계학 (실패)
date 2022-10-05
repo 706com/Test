@@ -13,6 +13,8 @@ public class _2108_통계학 {
 
         int N = Integer.parseInt(br.readLine());
 
+        //카운팅 정렬할 때 쓰기위한 배열
+        //주의할 점: 입력값이 -4000~4000 이면 총 8001개이다
         int[] arr = new int[N];
         int[] counting = new int[8001];
         int[] result = new int[N];
@@ -30,12 +32,22 @@ public class _2108_통계학 {
             counting[i] += counting[i-1];
         }
         //카운팅정렬 완료
+        //최종 result배열 인덱스로 가기위해선 -4000을 해줘야한다
         for(int i=arr.length-1; i>=0; i--){
             int value = arr[i];
             counting[value]--;
             result[counting[value]] = value-4000;
         }
 
+        //정렬이 제대로 됐는지 확인하기. 문제 제출할 때에는 주석처리
+        //------------------
+        for(int i=0; i<result.length; i++){
+            System.out.print(result[i]+"\t");
+        }
+        //------------------
+        
+        
+        //본격적인 통계학 문제 값 산출
         //1.산술평균 , 2.중앙값 , 3.최빈값 , 4.범위
         int average;
         int mid;
@@ -52,10 +64,10 @@ public class _2108_통계학 {
         boolean check = true;
 
         for(int i=1; i<result.length; i++){
-            //모든수의 합
+            //모든수의 합 ->산술평균 산출을 위해
             sum+=result[i];
 
-            //최댓값
+            //최댓값 
             if(max<result[i]){
                 max = result[i];
             }
@@ -108,12 +120,7 @@ public class _2108_통계학 {
         range = max-min;
 
         System.out.println();
-
-
-        for(int i=0; i<result.length; i++){
-            System.out.print(result[i]+"\t");
-        }
-
+        
 
         System.out.println();
         System.out.println(average);
