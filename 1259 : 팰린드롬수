@@ -1,23 +1,31 @@
-//1259 : 팰린드롬수
+package 백준;
 
+//1259 : 팰린드롬수
 //새로 알게된 것
 //charAt -> string(문자열) 타입을 char(낱개의 문자) 타입 으로 쪼개는 것
-//next,readLine 에 대해서 제대로 파악해보기 -> 이것때문에 실패
+//next , readline 에 대해서 제대로 파악
 
 import java.util.Scanner;
 
-public class Main{
+public class _1259_팰린드롬수 {
     public static void main(String[] args){
 
         Scanner sc = new Scanner(System.in);
-        String str = sc.next();
         boolean check = true;
 
-        while(!str.equals("0")){
+        //str의 내용이 0이 아닐때 에는 계속 반복
+        while(true){
+            int num = sc.nextInt();
+            String str = Integer.toString(num);
 
-            for(int i=0; i<str.length()/2; i++){
+            if(str.equals("0")){
+                break;
+            }
+            //굳이 str의 내용 끝까지 돌 필요 없이 중간까지만 비교해주면 앞뒤 같은지 다른지 판별 가능
+            //<= 가 필수이다.
+            for(int i=0; i<=str.length()/2; i++){
 
-
+                //charAt -> string(문자열) 타입을 char(낱개의 문자) 타입 으로 쪼개는 것
                 if(str.charAt(i)==str.charAt(str.length()-i-1)){
                     check = true;
                 }
@@ -26,15 +34,10 @@ public class Main{
                     break;
                 }
             }
-
             if(check)
                 System.out.println("yes");
             else
                 System.out.println("no");
-
-            str = sc.next();
         }
     }
 }
-
-//next , readline 에 대해서 제대로 파악 -> 이로 인해 
