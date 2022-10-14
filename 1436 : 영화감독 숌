@@ -1,35 +1,29 @@
 //1436 : 영화감독 숌
 //새로 알게된 것
 //부르트포스란 ? : brute force(무식한 힘) : 완전탐색
-//String.value : String 으로 변환
+//String.value(int) : String 으로 변환
 //contains("?") : 이 문자열을 포함하는가?
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-public class Main{
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        int seq = sc.nextInt();
+public class Test {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String N = br.readLine();
 
-        if(seq<=10000) {
-            System.out.println(six(seq));
-        }
-        else
-            System.out.println("범위초과");
-    }
+        int cnt = 1;
+        int result=666; //result 값으로 값 찾기
 
-    //sequence == 순서
-    public static int six(int seq){ //3
-        int count =1;
-        int num = 666; //초깃값 : 맨처음
-        while(count != seq){
-            num++;
-
-            if(String.valueOf(num).contains("666")){
-                count++;
+        //while문의 조건 : cnt 의 값이 처음 입력한 순서일 때 까지
+        while (cnt != Integer.parseInt(N)) {
+            result++;
+            if (String.valueOf(result).contains("666")) {   //String으로 변환한 result 값이 666을 포함하는가?
+                cnt++;  //포함하면 cnt 증가
             }
         }
-
-        return num;
+        System.out.println(result);
     }
 }
+
