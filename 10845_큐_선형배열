@@ -85,6 +85,6 @@ public class _10845_큐_선형배열 {
         }
         else {
             System.out.println(q[rear-1]);
-        }
+        }a
     }
 }
