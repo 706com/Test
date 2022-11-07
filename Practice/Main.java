@@ -17,6 +17,7 @@ public class Main{
         d.name();
         Son s = new Son();
         s.name();
+        s.name();
 
     }
 }
